@@ -1,0 +1,57 @@
+@import "tailwindcss";
+/* src/app.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* src/app.css */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling */
+  font-family: Arial, sans-serif;
+}
+
+/* Ensure the slideshow and menu list cover the full screen */
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Flex layout for the menu list */
+.flex {
+  display: flex;
+}
+
+/* Half-width for the image and menu list */
+.w-1\/2 {
+  width: 50%;
+}
+
+/* Padding and spacing for the menu list */
+.p-8 {
+  padding: 2rem;
+}
+
+/* Large font sizes for better readability */
+.text-2xl {
+  font-size: 1.5rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+}
+
+.text-5xl {
+  font-size: 3rem;
+}
