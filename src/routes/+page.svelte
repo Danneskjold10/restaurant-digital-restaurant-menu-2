@@ -94,7 +94,7 @@
       },
       {
         name: 'Burgers',
-        image: '/images/commercial3.jpg',
+        image: '/images/burgers/burger_4.jpg',
         items: [
           {
             name: 'Cheese Burger',
@@ -136,7 +136,7 @@
       },
       {
         name: 'Sandwichs',
-        image: '/images/commercial4.jpg',
+        image: '/images/sandwichs/sandwich_3.jpg',
         items: [
           {
             name: 'Maxi Kebab',
@@ -184,7 +184,7 @@
       },
       {
         name: 'Nuggets',
-        image: '/images/nuggets/nuggets_1.jpg',
+        image: '/images/nuggets/nuggets_2.jpg',
         items: [
           {
             name: 'Chicken Nuggets',
@@ -203,7 +203,7 @@
 
       {
         name: 'Assiettes',
-        image: '/images/assiettes/assiette_1.jpg',
+        image: '/images/assiettes/assiettes_3.jpg',
         items: [
           {
             name: 'Assiette Kebab',
