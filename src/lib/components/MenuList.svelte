@@ -58,7 +58,8 @@
 
   .solo-menu-headers {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end; /* Align headers to the right */
+    gap: 16px; /* Spacing between solo and menu headers */
     margin-bottom: 8px;
     font-size: 1.1rem;
     font-weight: bold;
