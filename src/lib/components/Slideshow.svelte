@@ -77,7 +77,7 @@
   }
 
   .description-bubble {
-    bottom: 120px; /* Position above the price bubble */
+    top: 16px; /* Position at the top */
   }
 
   .price-bubble {
