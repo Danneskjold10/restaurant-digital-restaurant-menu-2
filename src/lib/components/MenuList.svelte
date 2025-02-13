@@ -1,44 +1,64 @@
 <script lang="ts">
-    export let image: string;
-    export let menuType: string; // Header for the menu type (e.g., "Tacos", "Burgers")
-    export let items: Array<{ name: string; soloPrice: string; menuPrice: string; ingredients: string }> = [];
-  </script>
-  
-  <div class="flex h-screen">
-    <!-- Left Side: Image -->
-    <div class="w-1/2">
-      <img src={image} alt="Menu Image" class="w-full h-full object-cover" />
-    </div>
-  
-    <!-- Right Side: Menu List -->
-    <div class="w-1/2 p-8">
-      <!-- Header for the menu type -->
-      <h1 class="text-5xl font-bold mb-12 text-center">{menuType}</h1>
-  
-      <!-- Table for menu items -->
-      <div class="space-y-6">
-        <!-- Table headers -->
-        <div class="flex justify-between font-bold text-3xl">
-          <span>Item</span>
-          <div class="flex gap-8">
-            <span>Solo</span>
-            <span>Menu</span>
-          </div>
+  export let image: string;
+  export let menuType: string; // Header for the menu type (e.g., "Tacos", "Burgers")
+  export let items: Array<{ name: string; soloPrice: string; menuPrice: string; ingredients: string }> = [];
+</script>
+
+<style>
+  .menu-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full height of the screen */
+  }
+
+  .menu-image {
+    flex: 1; /* Takes up half the screen */
+    background-size: cover;
+    background-position: center;
+  }
+
+  .menu-list {
+    flex: 1; /* Takes up half the screen */
+    padding: 16px;
+    overflow-y: auto; /* Scrollable if content overflows */
+  }
+
+  .menu-header {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 1.5rem;
+  }
+
+  .menu-item .ingredients {
+    font-size: 1.2rem;
+    color: #666;
+  }
+</style>
+
+<div class="menu-container">
+  <!-- Left Side: Image -->
+  <div class="menu-image" style="background-image: url('{image}');"></div>
+
+  <!-- Right Side: Menu List -->
+  <div class="menu-list">
+    <h1 class="menu-header">{menuType}</h1>
+    {#each items as item}
+      <div class="menu-item">
+        <span>{item.name}</span>
+        <div class="flex gap-4">
+          <span>{item.soloPrice}</span>
+          <span>{item.menuPrice}</span>
         </div>
-  
-        <!-- Menu items -->
-        {#each items as item}
-          <div class="flex flex-col text-2xl">
-            <div class="flex justify-between">
-              <span>{item.name}</span>
-              <div class="flex gap-8">
-                <span>{item.soloPrice}</span>
-                <span>{item.menuPrice}</span>
-              </div>
-            </div>
-            <p class="text-xl text-gray-600">{item.ingredients}</p> <!-- Ingredients -->
-          </div>
-        {/each}
       </div>
-    </div>
+      <p class="ingredients">{item.ingredients}</p>
+    {/each}
   </div>
+</div>

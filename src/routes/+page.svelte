@@ -7,7 +7,7 @@
   {
     image: '/images/commercial1.jpg',
     name: 'Special Taco',
-    price: '$9.99',
+    price: '$12.99',
     description: 'A delicious taco with grilled chicken, fresh veggies, and our signature sauce.',
   },
   {
