@@ -55,3 +55,13 @@ body, html {
 .text-5xl {
   font-size: 3rem;
 }
+
+@media screen and (max-aspect-ratio: 9/16) {
+  body {
+    width: 100vh;  /* Adapt to vertical view */
+    height: 100vw;
+    transform: rotate(90deg);
+    transform-origin: center center;
+    overflow: hidden;
+  }
+}
