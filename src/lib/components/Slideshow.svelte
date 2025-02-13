@@ -65,24 +65,45 @@
     }
   }
 
-  /* Vertical layout adjustments */
-  .text-bubble {
+  /* Description Bubble */
+  .description-bubble {
     position: absolute;
-    left: 8px;
-    right: 8px;
-    padding: 16px;
+    top: 16px;
+    right: 16px;
+    padding: 12px;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 300px; /* Less wide text bubbles */
+    max-width: 300px; /* Smaller width */
   }
 
-  .description-bubble {
-    top: 16px; /* Position at the top */
+  .description-bubble p {
+    margin: 0;
   }
 
+  .description-bubble .name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .description-bubble .description {
+    font-size: 1rem;
+    color: #666;
+  }
+
+  /* Price Bubble */
   .price-bubble {
-    bottom: 16px; /* Position at the bottom */
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    padding: 8px 12px;
+    background: rgba(16, 185, 129, 0.9); /* Cool green background */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: white;
   }
 </style>
 
@@ -93,16 +114,14 @@
         <!-- Background image with fume effect -->
         <img src={item.image} alt="" class="w-full h-full object-cover" />
 
-        <!-- Image Description Bubble -->
-        <div class="text-bubble description-bubble">
-          <p class="text-3xl font-bold text-gray-900">{item.name}</p>
-          <p class="text-lg text-gray-600 mt-2">{item.description}</p>
+        <!-- Description Bubble (Top-Right) -->
+        <div class="description-bubble">
+          <p class="name">{item.name}</p>
+          <p class="description">{item.description}</p>
         </div>
 
-        <!-- Price Tag Bubble -->
-        <div class="text-bubble price-bubble bg-green-500">
-          <p class="text-2xl font-bold text-white">{item.price}</p>
-        </div>
+        <!-- Price Bubble (Bottom-Left) -->
+        <div class="price-bubble">{item.price}</div>
       </div>
     {/each}
   </div>
