@@ -69,28 +69,31 @@
 	// Calculate positions for UI elements
 	let descriptionStyle = $derived(
 		isPortrait
-			? `position: absolute; bottom: 100px; left: 0; right: 0; background-color: rgba(0,0,0,0.7); padding: 24px; text-align: center;`
-			: `position: absolute; bottom: 40px; left: 40px; max-width: 500px; background-color: rgba(0,0,0,0.7); padding: 25px; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);`
+			? `position: absolute; bottom: 80px; left: 20px; right: 20px; text-align: center;`
+			: `position: absolute; bottom: 40px; left: 40px; max-width: 500px;`
 	);
 		
 	let priceStyle = $derived(
 		isPortrait
-			? `position: absolute; top: 100px; right: 0; background-color: #e53e3e; padding: 15px 30px; clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);`
-			: `position: absolute; top: 40px; right: 0; background-color: #e53e3e; padding: 15px 50px 15px 30px; clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);`
+			? `position: absolute; top: 80px; right: 0;`
+			: `position: absolute; top: 40px; right: 0;`
 	);
 </script>
 
 <style>
+	/* Base styles */
 	.slide {
 		position: absolute;
 		inset: 0;
 		opacity: 0;
-		transition: opacity 1.5s ease-in-out;
+		transition: opacity 1.5s ease, transform 1.5s ease;
+		transform: scale(1.05);
 	}
 
 	.slide.active {
 		opacity: 1;
 		z-index: 2;
+		transform: scale(1);
 	}
 
 	.slide img {
@@ -98,9 +101,14 @@
 		height: 100%;
 		object-fit: cover;
 		object-position: center center;
-		filter: brightness(0.9);
+		transition: transform 8s ease-in-out;
 	}
 	
+	.active img {
+		transform: scale(1.1);
+	}
+
+	/* Decorative elements */
 	.img-overlay {
 		position: absolute;
 		inset: 0;
@@ -108,28 +116,95 @@
 		z-index: 1;
 	}
 	
-	.slide-content {
-		position: relative;
-		z-index: 2;
-		height: 100%;
+	/* Animations */
+	@keyframes float {
+		0% { transform: translateY(0px); }
+		50% { transform: translateY(-10px); }
+		100% { transform: translateY(0px); }
 	}
 	
-	.special-badge {
-		background: #e53e3e;
+	@keyframes pulse {
+		0% { transform: scale(1); }
+		50% { transform: scale(1.05); }
+		100% { transform: scale(1); }
+	}
+	
+	@keyframes glow {
+		0% { text-shadow: 0 0 5px rgba(255,255,255,0.5), 0 0 10px rgba(255,255,255,0.3); }
+		50% { text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.5); }
+		100% { text-shadow: 0 0 5px rgba(255,255,255,0.5), 0 0 10px rgba(255,255,255,0.3); }
+	}
+	
+	/* Neon text effect */
+	.neon-text {
+		color: #fff;
+		text-shadow: 
+			0 0 5px rgba(255,255,255,1),
+			0 0 10px rgba(255,255,255,0.8),
+			0 0 20px #FF416C,
+			0 0 30px #FF416C,
+			0 0 40px #FF416C;
+		animation: glow 2s ease-in-out infinite;
+	}
+	
+	/* Price tag styles */
+	.price-tag {
+		background: linear-gradient(135deg, #FF416C, #FF4B2B);
+		padding: 15px 50px 15px 25px;
 		color: white;
 		font-weight: bold;
-		padding: 5px 12px;
-		border-radius: 20px;
-		font-size: 1rem;
-		margin-right: 10px;
-		display: inline-block;
-	}
-	
-	.price-text {
 		font-size: 2.5rem;
-		font-weight: bold;
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);
+		box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+		animation: pulse 2s infinite ease-in-out;
+	}
+	
+	/* Description box styles */
+	.description-box {
+		background-color: rgba(0,0,0,0.7);
+		backdrop-filter: blur(10px);
+		border-radius: 10px;
+		padding: 25px;
+		box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+		border: 1px solid rgba(255,255,255,0.1);
+		animation: float 5s infinite ease-in-out;
+	}
+	
+	.badge {
+		display: inline-block;
+		background: linear-gradient(135deg, #FF416C, #FF4B2B);
 		color: white;
-		text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+		font-weight: bold;
+		padding: 8px 20px;
+		border-radius: 30px;
+		box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		font-size: 1rem;
+		position: relative;
+		overflow: hidden;
+	}
+	
+	.badge::after {
+		content: '';
+		position: absolute;
+		top: -50%;
+		left: -50%;
+		width: 200%;
+		height: 200%;
+		background: linear-gradient(
+			to right,
+			rgba(255,255,255,0) 0%,
+			rgba(255,255,255,0.5) 50%,
+			rgba(255,255,255,0) 100%
+		);
+		transform: rotate(30deg);
+		animation: shimmer 2s infinite;
+	}
+	
+	@keyframes shimmer {
+		0% { transform: rotate(30deg) translate(-100%, -100%); }
+		100% { transform: rotate(30deg) translate(100%, 100%); }
 	}
 	
 	:global(body) {
@@ -143,28 +218,34 @@
 	<div class="fixed inset-0 z-50">
 		{#each items as item, index}
 			<div class="slide {index === currentIndex ? 'active' : ''}">
-				<!-- Background image -->
+				<!-- Background image with zoom effect -->
 				<img src={item.image} alt={item.name} />
 				
-				<!-- Gradient overlay -->
-				<div class="img-overlay"></div>
+				<!-- Gradient overlay with pattern -->
+				<div class="img-overlay">
+					<!-- Optional subtle pattern overlay -->
+					<div style="position: absolute; inset: 0; background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDQiPjwvcmVjdD4KPHBhdGggZD0iTTAgNUw1IDBaTTUgNUwwIDBaIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjA4IiBzdHJva2Utd2lkdGg9IjAuNSI+PC9wYXRoPgo8L3N2Zz4='); opacity: 0.7;"></div>
+				</div>
 				
 				<!-- Slide content -->
 				<div class="slide-content">
 					<!-- Description section -->
-					<div style={descriptionStyle}>
-						<span class="special-badge">SPECIAL</span>
-						<h2 style="font-size: 2.5rem; font-weight: bold; color: white; margin: 0.5rem 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+					<div style={descriptionStyle} class="description-box">
+						<div class="badge">SPECIAL OFFER</div>
+						<h2 class="neon-text" style="font-size: 2.8rem; font-weight: bold; margin: 15px 0; font-family: 'Poppins', sans-serif;">
 							{item.name}
 						</h2>
-						<p style="font-size: 1.4rem; color: #f7fafc; margin: 1rem 0 0 0; line-height: 1.6;">
+						<p style="font-size: 1.4rem; color: #f7fafc; margin: 15px 0 0 0; line-height: 1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">
 							{item.description}
 						</p>
+						
+						<!-- Decorative element -->
+						<div style="height: 3px; width: 80px; background: linear-gradient(to right, #FF416C, #FF4B2B); margin: 20px auto 0 auto; border-radius: 3px;"></div>
 					</div>
 
 					<!-- Price tag -->
-					<div style={priceStyle}>
-						<span class="price-text">{item.price}</span>
+					<div style={priceStyle} class="price-tag">
+						{item.price}
 					</div>
 				</div>
 			</div>
