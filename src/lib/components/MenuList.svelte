@@ -52,40 +52,35 @@
 
 	<!-- Menu content section - with fixed height in portrait mode -->
 	<div style={isPortrait 
-		? `width: 100%; height: ${contentHeight}; overflow-y: auto;` 
-		: "width: 50%; height: 100%; overflow-y: auto;"} 
+		? `width: 100%; height: ${contentHeight}; overflow-y: auto; background-color: white;` 
+		: "width: 50%; height: 100%; overflow-y: auto; background-color: white;"} 
 		class="p-4">
 		<!-- Header -->
-		<h1 style={isPortrait ? "font-size: 2.25rem; margin-bottom: 0.75rem;" : "font-size: 3rem; margin-bottom: 1.5rem;"}
-			class="font-bold text-center">{menuType}</h1>
+		<h1 style={isPortrait ? "font-size: 2.5rem; margin-bottom: 1rem; text-align: center; font-weight: bold;" : "font-size: 3rem; margin-bottom: 1.5rem; text-align: center; font-weight: bold;"}>
+			{menuType}
+		</h1>
 
-		<!-- Menu items -->
-		<div class="space-y-2">
-			<!-- Table header -->
-			<div class="flex justify-between font-bold border-b-2 pb-2 mb-2"
-				style={isPortrait ? "font-size: 1.5rem;" : "font-size: 1.875rem;"}>
-				<span>Item</span>
-				<div class="flex gap-6">
-					<span>Solo</span>
-					<span>Menu</span>
-				</div>
+		<!-- Table header -->
+		<div style="display: flex; justify-content: space-between; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 15px;">
+			<div style="font-size: 1.5rem; font-weight: bold;">Item</div>
+			<div style="display: flex; gap: 30px; font-size: 1.5rem; font-weight: bold;">
+				<div>Solo</div>
+				<div>Menu</div>
 			</div>
-
-			<!-- Menu items list with smaller spacing in portrait mode -->
-			{#each items as item}
-				<div class="flex flex-col border-b pb-2 mb-2"
-					style={isPortrait ? "font-size: 1.25rem;" : "font-size: 1.5rem;"}>
-					<div class="flex justify-between">
-						<span class="font-semibold">{item.name}</span>
-						<div class="flex gap-6">
-							<span>{item.soloPrice}</span>
-							<span>{item.menuPrice}</span>
-						</div>
-					</div>
-					<p style={isPortrait ? "font-size: 1rem;" : "font-size: 1.25rem;"}
-						class="text-gray-600 mt-1">{item.ingredients}</p>
-				</div>
-			{/each}
 		</div>
+
+		<!-- Menu items list with improved spacing -->
+		{#each items as item}
+			<div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #ddd;">
+				<div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+					<span style="font-size: 1.3rem; font-weight: bold;">{item.name}</span>
+					<div style="display: flex; gap: 30px; font-size: 1.3rem;">
+						<span style="text-align: right; min-width: 60px;">{item.soloPrice}</span>
+						<span style="text-align: right; min-width: 60px;">{item.menuPrice}</span>
+					</div>
+				</div>
+				<p style="color: #666; font-size: 1.1rem; margin-top: 4px;">{item.ingredients}</p>
+			</div>
+		{/each}
 	</div>
 </div>
