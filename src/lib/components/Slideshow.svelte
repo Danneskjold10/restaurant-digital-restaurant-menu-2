@@ -12,12 +12,16 @@
 	// State with Svelte 5 runes
 	let currentIndex = $state(0);
 	let isPortrait = $state(false);
+	let windowWidth = $state(0);
+	let windowHeight = $state(0);
 	const SLIDE_DURATION = 5000; // ms
 	
-	// Update orientation function
-	function updateOrientation() {
+	// Update dimensions and orientation
+	function updateDimensions() {
 		if (typeof window !== 'undefined') {
-			isPortrait = window.innerHeight > window.innerWidth;
+			windowWidth = window.innerWidth;
+			windowHeight = window.innerHeight;
+			isPortrait = windowHeight > windowWidth;
 		}
 	}
 	
@@ -25,14 +29,14 @@
 	$effect(() => {
 		if (typeof window !== 'undefined') {
 			// Initial check
-			updateOrientation();
+			updateDimensions();
 			
 			// Add event listener
-			window.addEventListener('resize', updateOrientation);
+			window.addEventListener('resize', updateDimensions);
 			
 			// Cleanup
 			return () => {
-				window.removeEventListener('resize', updateOrientation);
+				window.removeEventListener('resize', updateDimensions);
 			};
 		}
 	});
@@ -61,6 +65,19 @@
 			clearTimeout(timeoutId);
 		};
 	});
+	
+	// Calculate positioning for bubbles with proper Svelte 5 runes syntax
+	let descriptionStyle = $derived(
+		isPortrait
+			? `position: absolute; bottom: ${Math.floor(windowHeight * 0.25)}px; left: ${Math.floor(windowWidth * 0.1)}px; right: ${Math.floor(windowWidth * 0.1)}px; max-width: 80%; background-color: rgba(255,255,255,0.9); padding: 1rem; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);`
+			: `position: absolute; bottom: 2rem; left: 2rem; max-width: 400px; background-color: rgba(255,255,255,0.9); padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);`
+	);
+		
+	let priceStyle = $derived(
+		isPortrait
+			? `position: absolute; top: ${Math.floor(windowHeight * 0.08)}px; right: ${Math.floor(windowWidth * 0.08)}px; background-color: rgba(34,197,94,0.9); padding: 1rem; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);`
+			: `position: absolute; top: 2rem; right: 2rem; background-color: rgba(34,197,94,0.9); padding: 1rem; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);`
+	);
 </script>
 
 <style>
@@ -77,6 +94,10 @@
 
 	.slide img {
 		animation: fume 5s infinite;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center center;
 	}
 
 	@keyframes fume {
@@ -93,6 +114,12 @@
 			opacity: 1;
 		}
 	}
+	
+	:global(body) {
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	}
 </style>
 
 {#if items.length > 0}
@@ -100,21 +127,23 @@
 		{#each items as item, index}
 			<div class="slide {index === currentIndex ? 'active' : ''}">
 				<!-- Background image with fume effect -->
-				<img src={item.image} alt={item.name} class="w-full h-full object-cover" />
+				<img src={item.image} alt={item.name} />
 
 				<!-- Description bubble - positioned differently based on orientation -->
-				<div class="absolute bg-white bg-opacity-90 p-6 rounded-lg shadow-lg" 
-				     style={isPortrait 
-				         ? "bottom: 25%; left: 10%; right: 10%; max-width: 80%;" 
-				         : "bottom: 8%; left: 8%; max-width: 400px;"}>
-					<p class="text-4xl font-bold text-gray-900">{item.name}</p>
-					<p class="text-xl text-gray-600 mt-4">{item.description}</p>
+				<div style={descriptionStyle}>
+					<p style={isPortrait ? "font-size: 2rem; font-weight: bold; color: #111827;" : "font-size: 2.25rem; font-weight: bold; color: #111827;"}>
+						{item.name}
+					</p>
+					<p style={isPortrait ? "font-size: 1.125rem; color: #4B5563; margin-top: 0.5rem;" : "font-size: 1.25rem; color: #4B5563; margin-top: 1rem;"}>
+						{item.description}
+					</p>
 				</div>
 
 				<!-- Price bubble -->
-				<div class="absolute bg-green-500 bg-opacity-90 p-4 rounded-lg shadow-lg"
-				     style={isPortrait ? "top: 8%; right: 8%;" : "top: 8%; right: 8%;"}>
-					<p class="text-3xl font-bold text-white">{item.price}</p>
+				<div style={priceStyle}>
+					<p style="font-size: 1.875rem; font-weight: bold; color: white;">
+						{item.price}
+					</p>
 				</div>
 			</div>
 		{/each}
