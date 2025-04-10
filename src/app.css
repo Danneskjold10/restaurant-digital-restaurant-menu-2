@@ -1,61 +1,102 @@
 @import "tailwindcss";
-/* src/app.css */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
 
-/* src/app.css */
+/* Base styles */
 body, html {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   overflow: hidden; /* Prevent scrolling */
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', Arial, sans-serif; /* Use a nicer font */
+  color-scheme: light dark; /* Support dark mode */
 }
 
-/* Ensure the slideshow and menu list cover the full screen */
-.fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* Flex layout for the menu list */
-.flex {
-  display: flex;
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-/* Half-width for the image and menu list */
-.w-1\/2 {
-  width: 50%;
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-/* Padding and spacing for the menu list */
-.p-8 {
-  padding: 2rem;
+@keyframes zoomIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
-/* Large font sizes for better readability */
-.text-2xl {
-  font-size: 1.5rem;
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
-.text-3xl {
-  font-size: 1.875rem;
+/* Apply animations to elements */
+.fade-in {
+  animation: fadeIn 1s ease forwards;
 }
 
-.text-4xl {
-  font-size: 2.25rem;
+.slide-up {
+  animation: slideUp 0.6s ease forwards;
 }
 
-.text-5xl {
-  font-size: 3rem;
+.slide-down {
+  animation: slideDown 0.6s ease forwards;
 }
 
+.zoom-in {
+  animation: zoomIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.pulse {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* Shadow effects */
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.text-shadow-lg {
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced image effects */
+.img-zoom {
+  overflow: hidden;
+}
+
+.img-zoom img {
+  transition: transform 0.4s ease;
+}
+
+.img-zoom:hover img {
+  transform: scale(1.1);
+}
+
+/* Media queries for different aspect ratios */
 @media screen and (max-aspect-ratio: 9/16) {
   body {
     width: 100vh;  /* Adapt to vertical view */
