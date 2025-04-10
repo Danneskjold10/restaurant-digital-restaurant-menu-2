@@ -36,51 +36,75 @@
 		}
 	});
 	
-	// Calculate image height for portrait mode using $derived
-	let imageHeight = $derived(isPortrait ? Math.floor(windowHeight * 0.35) + 'px' : '100%');
-	let contentHeight = $derived(isPortrait ? Math.floor(windowHeight * 0.65) + 'px' : '100%');
+	// Calculate dimensions based on orientation
+	let imageHeight = $derived(isPortrait ? Math.floor(windowHeight * 0.40) + 'px' : '100%');
+	let contentHeight = $derived(isPortrait ? Math.floor(windowHeight * 0.60) + 'px' : '100%');
+	
+	// Format prices with consistent spacing - fixed typing
+	function formatPrice(price: string): string {
+		if (!price.startsWith('$')) return price;
+		return price;
+	}
 </script>
 
+<!-- Main container with orientation-based styling -->
 <div class="flex h-screen" style={isPortrait ? "flex-direction: column; overflow: hidden;" : ""}>
-	<!-- Image section - fixed height in portrait mode -->
+	<!-- Image section -->
 	<div style={isPortrait 
-		? `width: 100%; height: ${imageHeight}; max-height: ${imageHeight}; overflow: hidden;` 
-		: "width: 50%; height: 100%;"}>
+		? `width: 100%; height: ${imageHeight}; max-height: ${imageHeight}; overflow: hidden; position: relative;` 
+		: "width: 50%; height: 100%; position: relative;"}>
+		
+		<!-- Background image with overlay -->
 		<img src={image} alt={menuType + " Menu Image"} 
 			style="width: 100%; height: 100%; object-fit: cover; object-position: center center;" />
+		
+		<!-- Dark overlay for better text contrast -->
+		<div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); padding: 20px; text-align: center;">
+			<h1 style="color: white; font-size: 3rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+				{menuType}
+			</h1>
+		</div>
 	</div>
 
-	<!-- Menu content section - with fixed height in portrait mode -->
+	<!-- Menu content section -->
 	<div style={isPortrait 
 		? `width: 100%; height: ${contentHeight}; overflow-y: auto; background-color: white;` 
 		: "width: 50%; height: 100%; overflow-y: auto; background-color: white;"} 
 		class="p-4">
-		<!-- Header -->
-		<h1 style={isPortrait ? "font-size: 2.5rem; margin-bottom: 1rem; text-align: center; font-weight: bold;" : "font-size: 3rem; margin-bottom: 1.5rem; text-align: center; font-weight: bold;"}>
-			{menuType}
-		</h1>
+		
+		<!-- Menu header for landscape mode (portrait mode header is on the image) -->
+		{#if !isPortrait}
+			<h2 style="font-size: 3rem; margin-bottom: 1.5rem; text-align: center; font-weight: bold; color: #333;">
+				{menuType}
+			</h2>
+		{/if}
 
 		<!-- Table header -->
-		<div style="display: flex; justify-content: space-between; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 15px;">
-			<div style="font-size: 1.5rem; font-weight: bold;">Item</div>
-			<div style="display: flex; gap: 30px; font-size: 1.5rem; font-weight: bold;">
+		<div style="display: flex; justify-content: space-between; border-bottom: 3px solid #e53e3e; padding-bottom: 12px; margin-bottom: 20px;">
+			<div style="font-size: 1.6rem; font-weight: bold; color: #e53e3e;">Item</div>
+			<div style="display: flex; gap: 40px; font-size: 1.6rem; font-weight: bold; color: #e53e3e;">
 				<div>Solo</div>
 				<div>Menu</div>
 			</div>
 		</div>
 
-		<!-- Menu items list with improved spacing -->
-		{#each items as item}
-			<div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #ddd;">
-				<div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-					<span style="font-size: 1.3rem; font-weight: bold;">{item.name}</span>
-					<div style="display: flex; gap: 30px; font-size: 1.3rem;">
-						<span style="text-align: right; min-width: 60px;">{item.soloPrice}</span>
-						<span style="text-align: right; min-width: 60px;">{item.menuPrice}</span>
+		<!-- Menu items list with improved styling -->
+		{#each items as item, index}
+			<div style={`margin-bottom: 25px; padding-bottom: 20px; border-bottom: ${index === items.length - 1 ? 'none' : '1px solid #e2e8f0'}; display: flex; flex-direction: column;`}>
+				<div style="display: flex; justify-content: space-between; margin-bottom: 8px; align-items: baseline;">
+					<span style="font-size: 1.5rem; font-weight: bold; color: #2d3748;">{item.name}</span>
+					<div style="display: flex; gap: 40px; font-size: 1.5rem;">
+						<span style="text-align: right; min-width: 70px; font-weight: 600; color: #2d3748;">{formatPrice(item.soloPrice)}</span>
+						<span style="text-align: right; min-width: 70px; font-weight: 600; color: #2d3748;">{formatPrice(item.menuPrice)}</span>
 					</div>
 				</div>
-				<p style="color: #666; font-size: 1.1rem; margin-top: 4px;">{item.ingredients}</p>
+				<p style="color: #4a5568; font-size: 1.2rem; margin-top: 5px; font-style: italic;">{item.ingredients}</p>
 			</div>
 		{/each}
+		
+		<!-- Footer with branding -->
+		<div style="margin-top: 30px; text-align: center; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+			<p style="color: #718096; font-size: 1.1rem;">Enjoy your meal!</p>
+		</div>
 	</div>
 </div>
