@@ -57,8 +57,8 @@
 		background: linear-gradient(90deg, #FF416C, #FF4B2B, #f83600, #FF416C);
 		background-size: 300% 300%;
 		animation: gradientAnimation 10s ease infinite;
-		background-clip: text; /* Standard property */
-		-webkit-background-clip: text; /* Vendor prefixed property */
+		background-clip: text;
+		-webkit-background-clip: text;
 		color: transparent;
 		text-shadow: 0px 2px 4px rgba(0,0,0,0.1);
 	}
@@ -99,21 +99,33 @@
 		box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 	}
 	
+	/* Fixed badge positioning */
 	.badge {
 		position: absolute;
-		top: -10px;
-		right: -10px;
+		top: -8px;           /* Changed from -10px to 5px */
+		right: 5px;         /* Changed from -10px to 5px */
 		background: #FF416C;
 		color: white;
 		border-radius: 50%;
-		width: 30px;
-		height: 30px;
+		width: 24px;        /* Reduced from 30px to 24px */
+		height: 24px;       /* Reduced from 30px to 24px */
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		font-weight: bold;
-		font-size: 14px;
-		box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+		font-size: 12px;    /* Reduced from 14px to 12px */
+		box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+		z-index: 1;         /* Ensure it's above other content */
+	}
+	
+	/* Hide scrollbar while maintaining scroll functionality */
+	::-webkit-scrollbar {
+		display: none;
+	}
+	
+	.no-scrollbar {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
 	}
 </style>
 
@@ -148,11 +160,11 @@
 		</div>
 	</div>
 
-	<!-- Menu content section -->
+	<!-- Menu content section - with no-scrollbar class -->
 	<div style={isPortrait 
 		? `width: 100%; height: ${contentHeight}; overflow-y: auto; background-color: white; box-shadow: inset 0 5px 15px rgba(0,0,0,0.1);` 
 		: "width: 50%; height: 100%; overflow-y: auto; background-color: white; box-shadow: inset 5px 0 15px rgba(0,0,0,0.1);"} 
-		class="p-4">
+		class="p-4 no-scrollbar">
 		
 		<!-- Menu header for landscape mode (portrait mode header is on the image) -->
 		{#if !isPortrait}
@@ -163,11 +175,11 @@
 
 		<!-- Table header with fancy styling -->
 		<div style="display: flex; justify-content: space-between; padding: 15px; margin: 0 -15px 25px -15px; position: relative; overflow: hidden;">
-			<!-- Background with gradient -->
-			<div style="position: absolute; inset: 0; background: linear-gradient(135deg, #FF416C, #FF4B2B); transform: skewY(-2deg); transform-origin: top left; z-index: -1;"></div>
+			<!-- Background with gradient - changed to a lighter background for brown text visibility -->
+			<div style="position: absolute; inset: 0; background: linear-gradient(135deg, #FFE8D6, #FFDAB9); transform: skewY(-2deg); transform-origin: top left; z-index: -1;"></div>
 			
-			<div style="font-size: 1.6rem; font-weight: bold; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">Item</div>
-			<div style="display: flex; gap: 40px; font-size: 1.6rem; font-weight: bold; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">
+			<div style="font-size: 1.6rem; font-weight: bold; color: #8B4513; text-shadow: 1px 1px 3px rgba(255,255,255,0.3);">Item</div>
+			<div style="display: flex; gap: 40px; font-size: 1.6rem; font-weight: bold; color: #8B4513; text-shadow: 1px 1px 3px rgba(255,255,255,0.3);">
 				<div>Solo</div>
 				<div>Menu</div>
 			</div>
@@ -175,8 +187,8 @@
 
 		<!-- Menu items list with eye-catching styling -->
 		{#each items as item, index}
-			<div class="menu-item-hover" style={`margin: 0 -5px 20px -5px; padding: 15px; border-radius: 10px; background-color: white; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 4px solid #FF416C;`}>
-				<!-- Price badge for visual flair - show on random items -->
+			<div class="menu-item-hover" style={`margin: 0 -5px 20px -5px; padding: 15px; border-radius: 10px; background-color: white; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 4px solid ${index % 3 === 0 ? '#FF416C' : (index % 3 === 1 ? '#FF4B2B' : '#f83600')};`}>
+				<!-- Price badge for visual flair - show on some items with fixed positioning -->
 				{#if index % 3 === 0}
 					<div class="badge shimmer">
 						<span>★</span>

@@ -179,7 +179,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== Slideshow Elements ===== */
 .price-tag {
-  background: linear-gradient(135deg, #FF416C, #FF4B2B);
+  background: linear-gradient(135deg, #ffdc41, #FF4B2B);
   padding: 15px 50px 15px 25px;
   color: white;
   font-weight: bold;
@@ -456,4 +456,39 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 5;
   transform: scale(1.05);
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* Add these CSS rules to your app.css file */
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Make sure overflow elements still scroll but without showing scrollbar */
+.overflow-y-auto {
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+  display: none;
+}
+
+/* Apply to specific menu content container */
+.menu-content {
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.menu-content::-webkit-scrollbar {
+  display: none;
 }

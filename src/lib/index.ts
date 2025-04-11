@@ -25,25 +25,25 @@ export interface MenuCategory {
 
 export const slideshowItems: SlideshowItem[] = [
 	{
-		image: '/images/commercial1.jpg',
+		image: '/images/commercial1.webp',
 		name: 'Special Taco',
 		price: '$12.99',
 		description: 'A delicious taco with grilled chicken, fresh veggies, and our signature sauce.',
 	},
 	{
-		image: '/images/commercial2.jpg',
+		image: '/images/commercial2.webp',
 		name: 'Big King Burger',
 		price: '$12.99',
 		description: 'A juicy beef patty with melted cheese, crispy bacon, and a special BBQ sauce.',
 	},
 	{
-		image: '/images/commercial3.jpg',
+		image: '/images/commercial3.webp',
 		name: 'Spicy Nuggets',
 		price: '$7.99',
 		description: 'Crispy and spicy chicken nuggets served with ranch dressing.',
 	},
 	{
-		image: '/images/commercial4.jpg',
+		image: '/images/commercial4.webp',
 		name: 'Maxi Kebab',
 		price: '$10.99',
 		description: 'A hearty kebab wrap filled with grilled meat, fresh veggies, and tangy sauce.',
@@ -53,7 +53,7 @@ export const slideshowItems: SlideshowItem[] = [
 export const menuCategories: MenuCategory[] = [
     {
         name: 'Tacos',
-        image: '/images/tacos/tacos_2.jpg',
+        image: '/images/tacos/tacos_2.webp',
         items: [
             { name: 'Kebab', soloPrice: '$5.99', menuPrice: '$8.99', ingredients: 'Grilled chicken, lettuce, cheese, salsa' },
             { name: 'Steak', soloPrice: '$6.99', menuPrice: '$9.99', ingredients: 'Seasoned beef, onions, cilantro, lime' },
@@ -68,7 +68,7 @@ export const menuCategories: MenuCategory[] = [
     },
     {
         name: 'Burgers',
-        image: '/images/burgers/burger_4.jpg',
+        image: '/images/burgers/burger_4.webp',
         items: [
             { name: 'Cheese Burger', soloPrice: '$8.99', menuPrice: '$12.99', ingredients: 'Beef patty, cheese, lettuce, tomato, special sauce' },
             { name: 'Chicken Burger', soloPrice: '$10.99', menuPrice: '$14.99', ingredients: 'Crispy chicken, lettuce, tomato, mayo' },
@@ -80,7 +80,7 @@ export const menuCategories: MenuCategory[] = [
     },
     {
         name: 'Sandwichs',
-        image: '/images/sandwichs/sandwich_3.jpg',
+        image: '/images/sandwichs/sandwich_3.webp',
         items: [
             { name: 'Maxi Kebab', soloPrice: '$7.99', menuPrice: '$11.99', ingredients: 'Large portion kebab meat, salad, sauce in pita' },
             { name: 'Galette Kebab', soloPrice: '$6.99', menuPrice: '$10.99', ingredients: 'Kebab meat, salad, sauce wrapped in flatbread' },
@@ -93,7 +93,7 @@ export const menuCategories: MenuCategory[] = [
     },
     {
         name: 'Nuggets',
-        image: '/images/nuggets/nuggets_2.jpg',
+        image: '/images/nuggets/nuggets_2.webp',
         items: [
             { name: 'Chicken Nuggets', soloPrice: '$6.99', menuPrice: '$9.99', ingredients: 'Crispy chicken nuggets with your choice of dipping sauce' },
             { name: 'Spicy Nuggets', soloPrice: '$7.99', menuPrice: '$10.99', ingredients: 'Spicy chicken nuggets with ranch dressing' },
@@ -101,7 +101,7 @@ export const menuCategories: MenuCategory[] = [
     },
     {
         name: 'Assiettes',
-        image: '/images/assiettes/assiettes_3.jpg',
+        image: '/images/assiettes/assiettes_3.webp',
         items: [
             { name: 'Assiette Kebab', soloPrice: '$11.99', menuPrice: '$14.99', ingredients: 'Kebab meat served with fries, salad, and bread' },
             { name: 'Assiette Escalope', soloPrice: '$12.99', menuPrice: '$15.99', ingredients: 'Breaded chicken cutlet served with fries, salad, and bread' },
