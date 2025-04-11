@@ -147,7 +147,7 @@
 	{#if showSlideshow}
 		<Slideshow 
 			items={slideshowItems} 
-			theme={theme}
+			
 			on:end={handleSlideshowEnd} 
 		/>
 	{:else if currentCategory}
@@ -156,7 +156,7 @@
 			image={currentCategory.image}
 			menuType={currentCategory.name}
 			items={currentCategory.items}
-			theme={theme}
+		
 		/>
 	{:else}
 		<!-- Fallback if something goes wrong -->

@@ -69,18 +69,30 @@
 	// Calculate positions for UI elements
 	let descriptionStyle = $derived(
 		isPortrait
-			? `position: absolute; bottom: 80px; left: 20px; right: 20px; text-align: center;`
+			? `position: absolute; bottom: ${Math.floor(windowHeight * 0.25)}px; left: ${Math.floor(windowWidth * 0.1)}px; right: ${Math.floor(windowWidth * 0.1)}px; text-align: center;`
 			: `position: absolute; bottom: 40px; left: 40px; max-width: 500px;`
 	);
 		
 	let priceStyle = $derived(
 		isPortrait
-			? `position: absolute; top: 80px; right: 0;`
+			? `position: absolute; top: ${Math.floor(windowHeight * 0.08)}px; right: 0;`
 			: `position: absolute; top: 40px; right: 0;`
 	);
 </script>
 
 <style>
+	/* Import statements must come first */
+	@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+	
+	/* Molinga font @font-face declaration - this is NOT an import */
+	@font-face {
+		font-family: 'Molinga';
+		src: url('/fonts/Molinga-pgOv1.otf') format('opentype');
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+	}
+
 	/* Base styles */
 	.slide {
 		position: absolute;
@@ -157,6 +169,7 @@
 		clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);
 		box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 		animation: pulse 2s infinite ease-in-out;
+		font-family: 'Molinga', cursive;
 	}
 	
 	/* Description box styles */
@@ -183,6 +196,7 @@
 		font-size: 1rem;
 		position: relative;
 		overflow: hidden;
+		font-family: 'Montserrat', sans-serif;
 	}
 	
 	.badge::after {
@@ -232,10 +246,12 @@
 					<!-- Description section -->
 					<div style={descriptionStyle} class="description-box">
 						<div class="badge">SPECIAL OFFER</div>
-						<h2 class="neon-text" style="font-size: 2.8rem; font-weight: bold; margin: 15px 0; font-family: 'Poppins', sans-serif;">
+						<!-- Using Molinga font for item name -->
+						<h2 style="font-size: 2.8rem; font-weight: bold; margin: 15px 0; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-family: 'Molinga', cursive;">
 							{item.name}
 						</h2>
-						<p style="font-size: 1.4rem; color: #f7fafc; margin: 15px 0 0 0; line-height: 1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">
+						<!-- Using Montserrat for description -->
+						<p style="font-size: 1.4rem; color: #f7fafc; margin: 15px 0 0 0; line-height: 1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); font-family: 'Montserrat', sans-serif;">
 							{item.description}
 						</p>
 						
@@ -243,7 +259,7 @@
 						<div style="height: 3px; width: 80px; background: linear-gradient(to right, #FF416C, #FF4B2B); margin: 20px auto 0 auto; border-radius: 3px;"></div>
 					</div>
 
-					<!-- Price tag -->
+					<!-- Price tag with Molinga font -->
 					<div style={priceStyle} class="price-tag">
 						{item.price}
 					</div>

@@ -1,4 +1,6 @@
+/* Import statements must come first - BEFORE any other rules or declarations */
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 /* ===== Reset and base styles ===== */
 * {
@@ -7,23 +9,64 @@
   padding: 0;
 }
 
+/* Add Molinga font using @font-face - this is NOT an import, so it can come after other rules */
+@font-face {
+  font-family: 'Molinga';
+  src: url('/fonts/Molinga-pgOv1.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 body, html {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
   background-color: black;
   color: #2d3748;
 }
 
 /* ===== Typography ===== */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
-  font-weight: 800;
+  font-family: 'Molinga', cursive;
   letter-spacing: 1px;
 }
+
+.menu-title {
+  font-family: 'Molinga', cursive;
+  letter-spacing: 2px;
+}
+
+.menu-item-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.menu-ingredients {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.menu-price {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.menu-header-text {
+  font-family: 'Molinga', cursive;
+  letter-spacing: 1px;
+}
+
+.footer-text {
+  font-family: 'Molinga', cursive;
+  letter-spacing: 1px;
+}
+
+/* Rest of your CSS remains the same */
 
 /* ===== Animation Keyframes ===== */
 @keyframes float {
@@ -59,8 +102,8 @@ h1, h2, h3, h4, h5, h6 {
   background: linear-gradient(90deg, #FF416C, #FF4B2B, #f83600, #FF416C);
   background-size: 300% 300%;
   animation: gradientFlow 8s ease infinite;
-  background-clip: text; /* Standard property */
-  -webkit-background-clip: text; /* Vendor prefixed property */
+  background-clip: text;
+  -webkit-background-clip: text;
   color: transparent;
   text-shadow: 0px 2px 4px rgba(0,0,0,0.1);
 }
@@ -127,7 +170,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .menu-header-text {
   font-size: 1.8rem;
-  font-weight: bold;
   color: white;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   transform: skewY(2deg);
@@ -146,7 +188,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .menu-item-name {
   font-size: 1.5rem;
-  font-weight: bold;
   color: #2d3748;
   text-shadow: 0px 1px 1px rgba(0,0,0,0.1);
 }
@@ -179,7 +220,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== Slideshow Elements ===== */
 .price-tag {
-  background: linear-gradient(135deg, #ffdc41, #FF4B2B);
+  background: linear-gradient(135deg, #FF416C, #FF4B2B);
   padding: 15px 50px 15px 25px;
   color: white;
   font-weight: bold;
@@ -322,18 +363,18 @@ h1, h2, h3, h4, h5, h6 {
 
 .star-badge {
   position: absolute;
-  top: -10px;
-  right: -10px;
+  top: 5px;
+  right: 5px;
   background: #FF416C;
   color: white;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
@@ -350,7 +391,6 @@ h1, h2, h3, h4, h5, h6 {
   color: #2d3748;
   font-size: 1.3rem;
   margin: 0;
-  font-weight: 600;
   text-align: center;
 }
 
@@ -458,37 +498,16 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
-/* Add these CSS rules to your app.css file */
-
-/* Hide scrollbar for Chrome, Safari and Opera */
+/* Hide scrollbar while maintaining scroll functionality */
 ::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
-* {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-/* Make sure overflow elements still scroll but without showing scrollbar */
-.overflow-y-auto {
-  overflow-y: auto;
+.no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
-.overflow-y-auto::-webkit-scrollbar {
-  display: none;
-}
-
-/* Apply to specific menu content container */
-.menu-content {
-  overflow-y: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.menu-content::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar {
   display: none;
 }
